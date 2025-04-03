@@ -1,0 +1,13 @@
+br\com\edilsonmaria\medicalconsult\user\resource\UserResouce.class
+br\com\edilsonmaria\medicalconsult\user\services\UserService.class
+br\com\edilsonmaria\medicalconsult\consulta\resource\ConsultaResource.class
+br\com\edilsonmaria\medicalconsult\consulta\repository\ConsultaRepository.class
+br\com\edilsonmaria\medicalconsult\exception\ExceptionDataIntegrityViolation.class
+br\com\edilsonmaria\medicalconsult\consulta\services\ConsultaService.class
+br\com\edilsonmaria\medicalconsult\config\JacksonConfig.class
+br\com\edilsonmaria\medicalconsult\user\repository\UserRepository.class
+br\com\edilsonmaria\medicalconsult\config\SwaggerConfig.class
+br\com\edilsonmaria\medicalconsult\consulta\domain\Consulta.class
+br\com\edilsonmaria\medicalconsult\user\domain\Permissao.class
+br\com\edilsonmaria\medicalconsult\user\domain\User.class
+br\com\edilsonmaria\medicalconsult\MedicalconsultApplication.class

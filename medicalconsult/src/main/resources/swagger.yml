@@ -1,0 +1,274 @@
+openapi: 3.0.1
+info:
+  title: Gerenciamento de Consultas
+  description: API REST para gerenciamento de usuários e consultas em um sistema de agendamentos. Permite cadastrar, atualizar, listar e deletar usuários e consultas.
+  version: v0
+servers:
+  - url: http://localhost:8080
+    description: Servidor Local para Desenvolvimento
+tags:
+  - name: user-resource
+    description: Recursos relacionados ao gerenciamento de usuários (CRUD de usuários)
+  - name: consulta-resource
+    description: Recursos relacionados ao gerenciamento de consultas (CRUD de consultas)
+
+paths:
+  /users/{id}:
+    get:
+      tags:
+        - user-resource
+      summary: Buscar informações de um usuário
+      description: Retorna os dados de um usuário específico com base no ID fornecido.
+      operationId: buscarUser
+      parameters:
+        - name: id
+          in: path
+          description: ID único do usuário
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: Informações do usuário retornadas com sucesso.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+    put:
+      tags:
+        - user-resource
+      summary: Atualizar informações de um usuário
+      description: Atualiza os dados de um usuário existente com base no ID fornecido.
+      operationId: atualizarUser
+      parameters:
+        - name: id
+          in: path
+          description: ID único do usuário
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/User"
+        required: true
+      responses:
+        "200":
+          description: Usuário atualizado com sucesso.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+    delete:
+      tags:
+        - user-resource
+      summary: Deletar um usuário
+      description: Remove um usuário específico com base no ID fornecido.
+      operationId: deletarUser
+      parameters:
+        - name: id
+          in: path
+          description: ID único do usuário
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: Usuário deletado com sucesso.
+
+  /consultas/{id}:
+    get:
+      tags:
+        - consulta-resource
+      summary: Buscar uma consulta específica
+      description: Retorna os dados de uma consulta específica com base no ID fornecido.
+      operationId: buscarConsulta
+      parameters:
+        - name: id
+          in: path
+          description: ID único da consulta
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: Informações da consulta retornadas com sucesso.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Consulta"
+    put:
+      tags:
+        - consulta-resource
+      summary: Atualizar informações de uma consulta
+      description: Atualiza os dados de uma consulta existente com base no ID fornecido.
+      operationId: atualizarConsulta
+      parameters:
+        - name: id
+          in: path
+          description: ID único da consulta
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Consulta"
+        required: true
+      responses:
+        "200":
+          description: Consulta atualizada com sucesso.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Consulta"
+    delete:
+      tags:
+        - consulta-resource
+      summary: Deletar uma consulta
+      description: Remove uma consulta específica com base no ID fornecido.
+      operationId: deletarConsulta
+      parameters:
+        - name: id
+          in: path
+          description: ID único da consulta
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: Consulta deletada com sucesso.
+
+  /users:
+    get:
+      tags:
+        - user-resource
+      summary: Listar todos os usuários
+      description: Retorna uma lista de todos os usuários cadastrados.
+      operationId: listarUsers
+      responses:
+        "200":
+          description: Lista de usuários retornada com sucesso.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/User"
+    post:
+      tags:
+        - user-resource
+      summary: Cadastrar um novo usuário
+      description: Adiciona um novo usuário ao sistema.
+      operationId: cadastraUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/User"
+        required: true
+      responses:
+        "200":
+          description: Usuário cadastrado com sucesso.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+
+  /consultas:
+    get:
+      tags:
+        - consulta-resource
+      summary: Listar todas as consultas
+      description: Retorna uma lista de todas as consultas agendadas.
+      operationId: listarConsultas
+      responses:
+        "200":
+          description: Lista de consultas retornada com sucesso.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Consulta"
+    post:
+      tags:
+        - consulta-resource
+      summary: Cadastrar uma nova consulta
+      description: Adiciona uma nova consulta ao sistema.
+      operationId: cadastrarConsulta
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Consulta"
+        required: true
+      responses:
+        "200":
+          description: Consulta cadastrada com sucesso.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Consulta"
+
+components:
+  schemas:
+    User:
+      type: object
+      description: Objeto que representa um usuário do sistema.
+      properties:
+        idUser:
+          type: integer
+          format: int64
+          description: ID único do usuário
+        nomeUser:
+          type: string
+          description: Nome completo do usuário
+        email:
+          type: string
+          description: Email do usuário
+        cpf:
+          type: string
+          description: CPF do usuário
+        telefone:
+          type: string
+          description: Telefone de contato do usuário
+        dataNascimento:
+          type: string
+          description: Data de nascimento do usuário
+        permissao:
+          type: string
+          description: Permissão de acesso do usuário (ADMIN ou SECRETARIO)
+          enum:
+            - ADMIN
+            - SECRETARIO
+
+    Consulta:
+      type: object
+      description: Objeto que representa uma consulta agendada.
+      properties:
+        idConsulta:
+          type: integer
+          format: int64
+          description: ID único da consulta
+        dataConsulta:
+          type: string
+          format: date-time
+          description: Data e hora agendada para a consulta
+        profissional:
+          type: string
+          description: Nome do profissional que realizará a consulta
+        especialidade:
+          type: string
+          description: Especialidade do profissional
+        user:
+          $ref: "#/components/schemas/User"
+          description: Usuário que agendou a consulta
